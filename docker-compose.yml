@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_agendamentos
+    environment:
+      POSTGRES_USER: bruno
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: agendamentosdb
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
