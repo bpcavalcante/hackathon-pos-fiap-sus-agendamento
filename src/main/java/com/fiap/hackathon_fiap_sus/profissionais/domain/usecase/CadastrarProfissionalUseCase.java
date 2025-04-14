@@ -15,7 +15,7 @@ public class CadastrarProfissionalUseCase implements CadastrarProfissionalUseCas
   @Override
   public ProfissionalDTO cadastrar(ProfissionalDTO profissionalDTO) {
     Profissional profissional = profissionalDTO.toDomain();
-    ProfissionalDatabaseDTO profissionalDatabaseDTO = profissionalRepositoryPort.save(profissional.toDTO());
+    ProfissionalDatabaseDTO profissionalDatabaseDTO = profissionalRepositoryPort.save(profissional.toDatabaseDTO());
     return profissionalDatabaseDTO.toDTO();
   }
 

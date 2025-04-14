@@ -1,5 +1,6 @@
 package com.fiap.hackathon_fiap_sus.profissionais.infraestructure.entities;
 
+import com.fiap.hackathon_fiap_sus.profissionais.domain.Profissional;
 import com.fiap.hackathon_fiap_sus.profissionais.domain.ports.dto.ProfissionalDatabaseDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +36,17 @@ public class ProfissionalEntity {
 
   public ProfissionalDatabaseDTO toDatabaseDTO() {
     return ProfissionalDatabaseDTO.builder()
+        .id(this.id)
+        .nome(this.nome)
+        .cpf(this.cpf)
+        .telefone(this.telefone)
+        .email(this.email)
+        .especialidade(this.especialidade)
+        .build();
+  }
+
+  public Profissional toDomain() {
+    return Profissional.builder()
         .id(this.id)
         .nome(this.nome)
         .cpf(this.cpf)
