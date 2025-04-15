@@ -30,7 +30,8 @@ public class ProfissionalController {
   private final CadastrarProfissionalUseCasePorts cadastrarProfissionalUseCasePorts;
   private final AtualizarProfissionalUseCasePorts atualizarProfissionalUseCasePorts;
   private final BuscarPorIDProfissionalUseCasePorts buscarPorIDProfissionalUseCasePorts;
-  private final ListarProfissionaisPorEspecialidadeUseCasePorts listarProfissionaisPorEspecialidadeUseCasePorts;
+  private final ListarProfissionaisPorEspecialidadeUseCasePorts
+      listarProfissionaisPorEspecialidadeUseCasePorts;
   private final DeleteProfissionalUseCasePorts deleteProfissionalUseCasePorts;
 
   @PostMapping
@@ -42,8 +43,10 @@ public class ProfissionalController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<ProfissionalOutput> atualizar(@PathVariable Long id, @RequestBody ProfissionalInput profissionalInput) {
-    ProfissionalDTO profissionalDTO = atualizarProfissionalUseCasePorts.atualizar(id, profissionalInput.toDTO());
+  public ResponseEntity<ProfissionalOutput> atualizar(
+      @PathVariable Long id, @RequestBody ProfissionalInput profissionalInput) {
+    ProfissionalDTO profissionalDTO =
+        atualizarProfissionalUseCasePorts.atualizar(id, profissionalInput.toDTO());
     return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(profissionalDTO.toOutput());
   }
 
@@ -56,8 +59,9 @@ public class ProfissionalController {
   @GetMapping
   public ResponseEntity<List<ProfissionalOutput>> listarProfissionaisPorEspecialidade(
       @RequestParam String especialidade) {
-    List<ProfissionalOutput> profissionais = listarProfissionaisPorEspecialidadeUseCasePorts
-        .listarProfissionaisPorEspecialidade(especialidade);
+    List<ProfissionalOutput> profissionais =
+        listarProfissionaisPorEspecialidadeUseCasePorts.listarProfissionaisPorEspecialidade(
+            especialidade);
     return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(profissionais);
   }
 
@@ -66,6 +70,4 @@ public class ProfissionalController {
     deleteProfissionalUseCasePorts.excluir(id);
     return ResponseEntity.noContent().build();
   }
-
-
 }
