@@ -1,9 +1,11 @@
 package com.fiap.hackathon_fiap_sus.usuarios.infraestructure.implementations;
 
+import com.fiap.hackathon_fiap_sus.usuarios.domain.Usuario;
 import com.fiap.hackathon_fiap_sus.usuarios.domain.ports.UsuarioRepositoryPort;
 import com.fiap.hackathon_fiap_sus.usuarios.domain.ports.dto.UsuarioDatabaseDTO;
 import com.fiap.hackathon_fiap_sus.usuarios.infraestructure.UsuarioJpaRepository;
 import com.fiap.hackathon_fiap_sus.usuarios.infraestructure.entities.UsuarioEntity;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ public class UsuarioSqlRepositoryImpl implements UsuarioRepositoryPort {
 
     UsuarioEntity usuarioEntity = new UsuarioEntity();
 
+    usuarioEntity.setId(usuarioDatabaseDTO.getId());
     usuarioEntity.setNome(usuarioDatabaseDTO.getNome());
     usuarioEntity.setEmail(usuarioDatabaseDTO.getEmail());
     usuarioEntity.setTelefone(usuarioDatabaseDTO.getTelefone());
@@ -30,5 +33,10 @@ public class UsuarioSqlRepositoryImpl implements UsuarioRepositoryPort {
     } catch (DataAccessException e) {
       throw new RuntimeException("Erro ao tentar salvar o usuario", e);
     }
+  }
+
+  @Override
+  public Optional<Usuario> findById(Long id) {
+    return usuarioJpaRepository.findById(id).map(UsuarioEntity::toDomain);
   }
 }

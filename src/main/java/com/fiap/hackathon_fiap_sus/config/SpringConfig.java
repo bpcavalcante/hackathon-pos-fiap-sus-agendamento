@@ -9,8 +9,12 @@ import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.DeleteProfission
 import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.ListarProfissionaisPorEspecialidadeUseCase;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.ProfissionalJpaRepository;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.implementations.ProfissionalSqlRepositoryImpl;
+import com.fiap.hackathon_fiap_sus.usuarios.application.ports.AtualizarUsuarioUseCasePorts;
+import com.fiap.hackathon_fiap_sus.usuarios.application.ports.BuscarPorIDUsuarioUseCasePorts;
 import com.fiap.hackathon_fiap_sus.usuarios.application.ports.CadastrarUsuarioUseCasePorts;
 import com.fiap.hackathon_fiap_sus.usuarios.domain.ports.UsuarioRepositoryPort;
+import com.fiap.hackathon_fiap_sus.usuarios.domain.usecase.AtualizarUsuarioUseCase;
+import com.fiap.hackathon_fiap_sus.usuarios.domain.usecase.BuscarPorIDUsuarioUseCase;
 import com.fiap.hackathon_fiap_sus.usuarios.domain.usecase.CadastrarUsuarioUseCase;
 import com.fiap.hackathon_fiap_sus.usuarios.infraestructure.UsuarioJpaRepository;
 import com.fiap.hackathon_fiap_sus.usuarios.infraestructure.implementations.UsuarioSqlRepositoryImpl;
@@ -20,6 +24,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class SpringConfig implements WebMvcConfigurer {
+
+  // Configurações Profissional
 
   @Bean
   public CadastrarProfissionalUseCase cadastrarProfissionalUseCase(
@@ -52,15 +58,28 @@ public class SpringConfig implements WebMvcConfigurer {
   }
 
   @Bean
+  public ProfissionalSqlRepositoryImpl profissionalSqlRepository(
+      ProfissionalJpaRepository profissionalJpaRepository) {
+    return new ProfissionalSqlRepositoryImpl(profissionalJpaRepository);
+  }
+
+  // Configurações Usuario
+
+  @Bean
   public CadastrarUsuarioUseCasePorts cadastrarUsuarioUseCasePorts(
       UsuarioRepositoryPort usuarioRepositoryPort) {
     return new CadastrarUsuarioUseCase(usuarioRepositoryPort);
   }
 
   @Bean
-  public ProfissionalSqlRepositoryImpl profissionalSqlRepository(
-      ProfissionalJpaRepository profissionalJpaRepository) {
-    return new ProfissionalSqlRepositoryImpl(profissionalJpaRepository);
+  public BuscarPorIDUsuarioUseCasePorts buscarPorIDUsuarioUseCasePorts(
+      UsuarioRepositoryPort usuarioRepositoryPort) {
+    return new BuscarPorIDUsuarioUseCase(usuarioRepositoryPort);
+  }
+
+  @Bean
+  public AtualizarUsuarioUseCasePorts atualizarUsuarioUseCasePorts(UsuarioRepositoryPort usuarioRepositoryPort) {
+    return new AtualizarUsuarioUseCase(usuarioRepositoryPort);
   }
 
   @Bean

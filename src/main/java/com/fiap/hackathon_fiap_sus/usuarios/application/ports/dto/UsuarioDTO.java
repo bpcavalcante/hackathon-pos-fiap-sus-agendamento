@@ -2,6 +2,7 @@ package com.fiap.hackathon_fiap_sus.usuarios.application.ports.dto;
 
 import com.fiap.hackathon_fiap_sus.usuarios.application.controller.dto.output.UsuarioOutput;
 import com.fiap.hackathon_fiap_sus.usuarios.domain.Usuario;
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ public class UsuarioDTO {
   private String nome;
   private String email;
   private String telefone;
-  private Date dataNascimento;
+  private LocalDate dataNascimento;
   private String cpf;
 
   public Usuario toDomain() {

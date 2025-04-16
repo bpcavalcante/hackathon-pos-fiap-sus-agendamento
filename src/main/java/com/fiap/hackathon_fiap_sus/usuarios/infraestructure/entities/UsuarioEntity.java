@@ -1,11 +1,13 @@
 package com.fiap.hackathon_fiap_sus.usuarios.infraestructure.entities;
 
+import com.fiap.hackathon_fiap_sus.usuarios.domain.Usuario;
 import com.fiap.hackathon_fiap_sus.usuarios.domain.ports.dto.UsuarioDatabaseDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,11 +33,22 @@ public class UsuarioEntity {
   private String nome;
   private String email;
   private String telefone;
-  private Date dataNascimento;
+  private LocalDate dataNascimento;
   private String cpf;
 
   public UsuarioDatabaseDTO toDataBaseDTO() {
     return UsuarioDatabaseDTO.builder()
+        .id(this.id)
+        .nome(this.nome)
+        .email(this.email)
+        .telefone(this.telefone)
+        .dataNascimento(this.dataNascimento)
+        .cpf(this.cpf)
+        .build();
+  }
+
+  public Usuario toDomain() {
+    return Usuario.builder()
         .id(this.id)
         .nome(this.nome)
         .email(this.email)
