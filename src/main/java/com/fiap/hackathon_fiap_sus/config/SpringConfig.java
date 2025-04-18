@@ -9,6 +9,11 @@ import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.DeleteProfission
 import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.ListarProfissionaisPorEspecialidadeUseCase;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.ProfissionalJpaRepository;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.implementations.ProfissionalSqlRepositoryImpl;
+import com.fiap.hackathon_fiap_sus.unidades.application.ports.CadastrarUnidadeUseCasePorts;
+import com.fiap.hackathon_fiap_sus.unidades.domain.ports.UnidadeRepositoryPort;
+import com.fiap.hackathon_fiap_sus.unidades.domain.usecase.CadastrarUnidadeUseCase;
+import com.fiap.hackathon_fiap_sus.unidades.infraestructure.UnidadeJpaRepository;
+import com.fiap.hackathon_fiap_sus.unidades.infraestructure.implementations.UnidadeSqlRepositoryImpl;
 import com.fiap.hackathon_fiap_sus.usuarios.application.ports.AtualizarUsuarioUseCasePorts;
 import com.fiap.hackathon_fiap_sus.usuarios.application.ports.BuscarPorIDUsuarioUseCasePorts;
 import com.fiap.hackathon_fiap_sus.usuarios.application.ports.CadastrarUsuarioUseCasePorts;
@@ -86,4 +91,17 @@ public class SpringConfig implements WebMvcConfigurer {
   public UsuarioSqlRepositoryImpl usuarioSqlRepository(UsuarioJpaRepository usuarioJpaRepository) {
     return new UsuarioSqlRepositoryImpl(usuarioJpaRepository);
   }
+
+  // Configurações Unidade
+
+  @Bean
+  public CadastrarUnidadeUseCasePorts cadastrarUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+    return new CadastrarUnidadeUseCase(unidadeRepositoryPort);
+  }
+
+  @Bean
+  public UnidadeSqlRepositoryImpl unidadeSqlRepository(UnidadeJpaRepository unidadeJpaRepository) {
+    return new UnidadeSqlRepositoryImpl(unidadeJpaRepository);
+  }
+
 }
