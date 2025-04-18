@@ -8,5 +8,6 @@ public interface UnidadeRepositoryPort {
 
   UnidadeDatabaseDTO save(UnidadeDatabaseDTO unidadeDatabaseDTO);
   Optional<Unidade> findById(Long id);
+  void excluir(Long id);
 
 }

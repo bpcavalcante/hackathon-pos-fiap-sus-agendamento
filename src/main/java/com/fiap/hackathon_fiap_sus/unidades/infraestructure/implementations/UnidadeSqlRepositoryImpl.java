@@ -5,7 +5,6 @@ import com.fiap.hackathon_fiap_sus.unidades.domain.ports.UnidadeRepositoryPort;
 import com.fiap.hackathon_fiap_sus.unidades.domain.ports.dto.UnidadeDatabaseDTO;
 import com.fiap.hackathon_fiap_sus.unidades.infraestructure.UnidadeJpaRepository;
 import com.fiap.hackathon_fiap_sus.unidades.infraestructure.entities.UnidadeEntity;
-import com.fiap.hackathon_fiap_sus.usuarios.domain.Usuario;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -36,5 +35,17 @@ public class UnidadeSqlRepositoryImpl implements UnidadeRepositoryPort {
   @Override
   public Optional<Unidade> findById(Long id) {
     return unidadeJpaRepository.findById(id).map(UnidadeEntity::toDomain);
+  }
+
+  @Override
+  public void excluir(Long id) {
+    try {
+      if (!unidadeJpaRepository.existsById(id)) {
+        throw new RuntimeException("Unidade com ID " + id + "não encontrado");
+      }
+      unidadeJpaRepository.deleteById(id);
+    } catch (DataAccessException e) {
+      throw new RuntimeException("Erro ao excluir unidade", e);
+    }
   }
 }

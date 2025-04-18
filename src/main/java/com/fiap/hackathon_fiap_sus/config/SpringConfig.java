@@ -9,11 +9,15 @@ import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.DeleteProfission
 import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.ListarProfissionaisPorEspecialidadeUseCase;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.ProfissionalJpaRepository;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.implementations.ProfissionalSqlRepositoryImpl;
+import com.fiap.hackathon_fiap_sus.unidades.application.ports.AtualizarUnidadeUseCasePorts;
 import com.fiap.hackathon_fiap_sus.unidades.application.ports.BuscarPorIDUnidadeUseCasePorts;
 import com.fiap.hackathon_fiap_sus.unidades.application.ports.CadastrarUnidadeUseCasePorts;
+import com.fiap.hackathon_fiap_sus.unidades.application.ports.DeleteUnidadeUseCasePorts;
 import com.fiap.hackathon_fiap_sus.unidades.domain.ports.UnidadeRepositoryPort;
+import com.fiap.hackathon_fiap_sus.unidades.domain.usecase.AtualizarUnidadeUseCase;
 import com.fiap.hackathon_fiap_sus.unidades.domain.usecase.BuscarPorIDUnidadeUseCase;
 import com.fiap.hackathon_fiap_sus.unidades.domain.usecase.CadastrarUnidadeUseCase;
+import com.fiap.hackathon_fiap_sus.unidades.domain.usecase.DeleteUnidadeUseCase;
 import com.fiap.hackathon_fiap_sus.unidades.infraestructure.UnidadeJpaRepository;
 import com.fiap.hackathon_fiap_sus.unidades.infraestructure.implementations.UnidadeSqlRepositoryImpl;
 import com.fiap.hackathon_fiap_sus.usuarios.application.ports.AtualizarUsuarioUseCasePorts;
@@ -104,6 +108,16 @@ public class SpringConfig implements WebMvcConfigurer {
   @Bean
   public BuscarPorIDUnidadeUseCasePorts buscarPorIDUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
     return new BuscarPorIDUnidadeUseCase(unidadeRepositoryPort);
+  }
+
+  @Bean
+  public AtualizarUnidadeUseCasePorts atualizarUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+    return new AtualizarUnidadeUseCase(unidadeRepositoryPort);
+  }
+
+  @Bean
+  public DeleteUnidadeUseCasePorts deleteUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+    return new DeleteUnidadeUseCase(unidadeRepositoryPort);
   }
 
   @Bean
