@@ -1,5 +1,6 @@
 package com.fiap.hackathon_fiap_sus.unidades.domain;
 
+import com.fiap.hackathon_fiap_sus.unidades.application.ports.dto.UnidadeDTO;
 import com.fiap.hackathon_fiap_sus.unidades.domain.ports.dto.UnidadeDatabaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,16 @@ public class Unidade {
 
   public UnidadeDatabaseDTO toDatabaseDTO() {
     return UnidadeDatabaseDTO.builder()
+        .id(this.id)
+        .unidade(this.unidade)
+        .endereco(this.endereco)
+        .cep(this.cep)
+        .numero(this.numero)
+        .build();
+  }
+
+  public UnidadeDTO toDTO() {
+    return UnidadeDTO.builder()
         .id(this.id)
         .unidade(this.unidade)
         .endereco(this.endereco)

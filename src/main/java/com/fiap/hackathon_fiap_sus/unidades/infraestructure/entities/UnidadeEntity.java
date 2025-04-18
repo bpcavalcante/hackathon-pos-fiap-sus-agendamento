@@ -1,5 +1,6 @@
 package com.fiap.hackathon_fiap_sus.unidades.infraestructure.entities;
 
+import com.fiap.hackathon_fiap_sus.unidades.domain.Unidade;
 import com.fiap.hackathon_fiap_sus.unidades.domain.ports.dto.UnidadeDatabaseDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +35,16 @@ public class UnidadeEntity {
 
   public UnidadeDatabaseDTO toDatabaseDTO() {
     return UnidadeDatabaseDTO.builder()
+        .id(this.id)
+        .unidade(this.unidade)
+        .endereco(this.endereco)
+        .cep(this.cep)
+        .numero(this.numero)
+        .build();
+  }
+
+  public Unidade toDomain() {
+    return Unidade.builder()
         .id(this.id)
         .unidade(this.unidade)
         .endereco(this.endereco)

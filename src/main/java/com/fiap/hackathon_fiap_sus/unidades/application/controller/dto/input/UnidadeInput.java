@@ -1,7 +1,6 @@
 package com.fiap.hackathon_fiap_sus.unidades.application.controller.dto.input;
 
 import com.fiap.hackathon_fiap_sus.unidades.application.ports.dto.UnidadeDTO;
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

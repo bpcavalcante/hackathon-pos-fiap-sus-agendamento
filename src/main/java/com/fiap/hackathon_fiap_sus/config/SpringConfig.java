@@ -9,8 +9,10 @@ import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.DeleteProfission
 import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.ListarProfissionaisPorEspecialidadeUseCase;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.ProfissionalJpaRepository;
 import com.fiap.hackathon_fiap_sus.profissionais.infraestructure.implementations.ProfissionalSqlRepositoryImpl;
+import com.fiap.hackathon_fiap_sus.unidades.application.ports.BuscarPorIDUnidadeUseCasePorts;
 import com.fiap.hackathon_fiap_sus.unidades.application.ports.CadastrarUnidadeUseCasePorts;
 import com.fiap.hackathon_fiap_sus.unidades.domain.ports.UnidadeRepositoryPort;
+import com.fiap.hackathon_fiap_sus.unidades.domain.usecase.BuscarPorIDUnidadeUseCase;
 import com.fiap.hackathon_fiap_sus.unidades.domain.usecase.CadastrarUnidadeUseCase;
 import com.fiap.hackathon_fiap_sus.unidades.infraestructure.UnidadeJpaRepository;
 import com.fiap.hackathon_fiap_sus.unidades.infraestructure.implementations.UnidadeSqlRepositoryImpl;
@@ -97,6 +99,11 @@ public class SpringConfig implements WebMvcConfigurer {
   @Bean
   public CadastrarUnidadeUseCasePorts cadastrarUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
     return new CadastrarUnidadeUseCase(unidadeRepositoryPort);
+  }
+
+  @Bean
+  public BuscarPorIDUnidadeUseCasePorts buscarPorIDUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+    return new BuscarPorIDUnidadeUseCase(unidadeRepositoryPort);
   }
 
   @Bean
