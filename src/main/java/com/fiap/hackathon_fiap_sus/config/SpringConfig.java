@@ -40,6 +40,8 @@ import com.fiap.hackathon_fiap_sus.usuarios.domain.usecase.BuscarPorIDUsuarioUse
 import com.fiap.hackathon_fiap_sus.usuarios.domain.usecase.CadastrarUsuarioUseCase;
 import com.fiap.hackathon_fiap_sus.usuarios.infraestructure.UsuarioJpaRepository;
 import com.fiap.hackathon_fiap_sus.usuarios.infraestructure.implementations.UsuarioSqlRepositoryImpl;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -176,4 +178,14 @@ public class SpringConfig implements WebMvcConfigurer {
         usuarioJpaRepository,
         unidadeJpaRepository);
   }
+
+  @Bean
+  public OpenAPI customOpenAPI() {
+    return new OpenAPI()
+        .info(new Info()
+            .title("Hackathon SUS API")
+            .version("1.0")
+            .description("Documentação da API do SUS"));
+  }
+
 }
