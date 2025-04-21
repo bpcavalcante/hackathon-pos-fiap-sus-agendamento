@@ -1,5 +1,16 @@
 package com.fiap.hackathon_fiap_sus.config;
 
+import com.fiap.hackathon_fiap_sus.agendamentos.application.ports.BuscarAgendamentoPorIdUseCasePorts;
+import com.fiap.hackathon_fiap_sus.agendamentos.application.ports.CadastrarAgendamentoUseCasePorts;
+import com.fiap.hackathon_fiap_sus.agendamentos.application.ports.CancelarAgendamentoIdUseCasePorts;
+import com.fiap.hackathon_fiap_sus.agendamentos.application.ports.ListarAgendamentosPorUsuarioIdUseCasePorts;
+import com.fiap.hackathon_fiap_sus.agendamentos.domain.ports.AgendamentoRepositoryPort;
+import com.fiap.hackathon_fiap_sus.agendamentos.domain.usecase.BuscarAgendamentoPorIdUseCase;
+import com.fiap.hackathon_fiap_sus.agendamentos.domain.usecase.CadastrarAgendamentoUseCase;
+import com.fiap.hackathon_fiap_sus.agendamentos.domain.usecase.CancelarAgendamentoUseCase;
+import com.fiap.hackathon_fiap_sus.agendamentos.domain.usecase.ListarAgendamentosPorUsuarioIdUseCase;
+import com.fiap.hackathon_fiap_sus.agendamentos.infraestructure.AgendamentoJpaRepository;
+import com.fiap.hackathon_fiap_sus.agendamentos.infraestructure.implementations.AgendamentoSqlRepositoryImpl;
 import com.fiap.hackathon_fiap_sus.profissionais.application.ports.DeleteProfissionalUseCasePorts;
 import com.fiap.hackathon_fiap_sus.profissionais.domain.ports.ProfissionalRepositoryPort;
 import com.fiap.hackathon_fiap_sus.profissionais.domain.usecase.AtualizarProfissionalUseCase;
@@ -89,7 +100,8 @@ public class SpringConfig implements WebMvcConfigurer {
   }
 
   @Bean
-  public AtualizarUsuarioUseCasePorts atualizarUsuarioUseCasePorts(UsuarioRepositoryPort usuarioRepositoryPort) {
+  public AtualizarUsuarioUseCasePorts atualizarUsuarioUseCasePorts(
+      UsuarioRepositoryPort usuarioRepositoryPort) {
     return new AtualizarUsuarioUseCase(usuarioRepositoryPort);
   }
 
@@ -101,22 +113,26 @@ public class SpringConfig implements WebMvcConfigurer {
   // Configurações Unidade
 
   @Bean
-  public CadastrarUnidadeUseCasePorts cadastrarUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+  public CadastrarUnidadeUseCasePorts cadastrarUnidadeUseCasePorts(
+      UnidadeRepositoryPort unidadeRepositoryPort) {
     return new CadastrarUnidadeUseCase(unidadeRepositoryPort);
   }
 
   @Bean
-  public BuscarPorIDUnidadeUseCasePorts buscarPorIDUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+  public BuscarPorIDUnidadeUseCasePorts buscarPorIDUnidadeUseCasePorts(
+      UnidadeRepositoryPort unidadeRepositoryPort) {
     return new BuscarPorIDUnidadeUseCase(unidadeRepositoryPort);
   }
 
   @Bean
-  public AtualizarUnidadeUseCasePorts atualizarUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+  public AtualizarUnidadeUseCasePorts atualizarUnidadeUseCasePorts(
+      UnidadeRepositoryPort unidadeRepositoryPort) {
     return new AtualizarUnidadeUseCase(unidadeRepositoryPort);
   }
 
   @Bean
-  public DeleteUnidadeUseCasePorts deleteUnidadeUseCasePorts(UnidadeRepositoryPort unidadeRepositoryPort) {
+  public DeleteUnidadeUseCasePorts deleteUnidadeUseCasePorts(
+      UnidadeRepositoryPort unidadeRepositoryPort) {
     return new DeleteUnidadeUseCase(unidadeRepositoryPort);
   }
 
@@ -125,4 +141,39 @@ public class SpringConfig implements WebMvcConfigurer {
     return new UnidadeSqlRepositoryImpl(unidadeJpaRepository);
   }
 
+  // Configurações Agendamento
+
+  @Bean
+  public CadastrarAgendamentoUseCasePorts cadastrarAgendamentoUseCasePorts(
+      AgendamentoRepositoryPort agendamentoRepositoryPort) {
+    return new CadastrarAgendamentoUseCase(agendamentoRepositoryPort);
+  }
+
+  @Bean
+  public ListarAgendamentosPorUsuarioIdUseCasePorts listarAgendamentosPorUsuarioIdUseCasePorts(AgendamentoRepositoryPort agendamentoRepositoryPort) {
+    return new ListarAgendamentosPorUsuarioIdUseCase(agendamentoRepositoryPort);
+  }
+
+  @Bean
+  public BuscarAgendamentoPorIdUseCasePorts buscarAgendamentoPorIdUseCasePorts(AgendamentoRepositoryPort agendamentoRepositoryPort) {
+    return new BuscarAgendamentoPorIdUseCase(agendamentoRepositoryPort);
+  }
+
+  @Bean
+  public CancelarAgendamentoIdUseCasePorts cancelarAgendamentoIdUseCasePorts(AgendamentoRepositoryPort agendamentoRepositoryPort) {
+    return new CancelarAgendamentoUseCase(agendamentoRepositoryPort);
+  }
+
+  @Bean
+  public AgendamentoSqlRepositoryImpl agendamentoSqlRepository(
+      AgendamentoJpaRepository agendamentoJpaRepository,
+      ProfissionalJpaRepository profissionalJpaRepository,
+      UsuarioJpaRepository usuarioJpaRepository,
+      UnidadeJpaRepository unidadeJpaRepository) {
+    return new AgendamentoSqlRepositoryImpl(
+        agendamentoJpaRepository,
+        profissionalJpaRepository,
+        usuarioJpaRepository,
+        unidadeJpaRepository);
+  }
 }
